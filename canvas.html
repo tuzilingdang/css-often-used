@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+<canvas id="myCanvas" width="750" height="1000">your browser does not support the canvas tag </canvas>
+
+<script type="text/javascript">
+
+var canvas=document.getElementById('myCanvas');
+var ctx=canvas.getContext('2d');
+
+const MARGIN = 30;
+
+var Rect = (x, y, width, height) => {
+	return {x:x, y:y, width: width, height: height};
+}
+
+var Point = (x, y) => {  
+    return {x:x, y:y};  
+};  
+
+var drawHeadImg = (pt, r ,src) => {
+	var headImg = new Image();
+	headImg.src = src;
+
+	headImg.onload = function() {
+		ctx.beginPath(); 
+
+		ctx.drawImage(headImg, pt.x - r, pt.y - r, r*2, r*2);
+	    // 创建图片纹理
+	    // var pattern = ctx.createPattern(headImg, "no-repeat");
+	    // 绘制一个圆
+	    ctx.fillStyle = 'transparent';
+	    ctx.arc(pt.x, pt.y, r + 10,0,2*Math.PI);
+	    // 填充绘制的圆
+	    ctx.fill(); 
+
+		ctx.lineWidth = 20;
+	    ctx.strokeStyle = 'white';
+    	ctx.stroke();
+    	ctx.closePath();
+	};
+}
+
+var drawNick = (text, x, y) => {
+	ctx.beginPath(); 
+	ctx.font="28px Verdana";
+	ctx.fillStyle="#999999";
+	ctx.fillText(text,x,y);
+}
+
+var drawComment = (text, x, y) => {
+	ctx.beginPath(); 
+	ctx.font="32px Verdana";
+	ctx.fillStyle="#333333";
+	ctx.fillText(text,x,y);
+}
+
+var drawProductInfo = (pt, width, height, info) => {
+	var productImg = new Image();
+	productImg.src = info.productImg;
+
+	productImg.onload = () => {
+		ctx.beginPath(); 
+		ctx.drawImage(productImg, pt.x, pt.y, width, height);
+
+		// 绘制商品title
+		ctx.rect(pt.x, pt.y + 560, width, 70);
+		ctx.globalAlpha=0.6;
+	    ctx.fillStyle="#F7F7F7";
+	    ctx.fill();
+
+	    ctx.font="28px Verdana";
+		ctx.fillStyle="#000000";
+		ctx.fillText(info.title,pt.x + 20, pt.y + 600);
+		ctx.closePath();
+
+
+		// 绘制商品成团人数
+        ctx.globalAlpha=1;
+        ctx.font="24px Verdana";
+        ctx.fillStyle="#E93B3D";
+        ctx.fillText("2222",pt.x, pt.y + 690);
+
+		// 绘制商品价格
+		ctx.globalAlpha=1;
+	    ctx.font="24px Verdana";
+		ctx.fillStyle="#E93B3D";
+		ctx.fillText("￥",pt.x + 85, pt.y + 690);
+
+	    ctx.font="32px Verdana";
+		ctx.fillStyle="#E93B3D";
+		ctx.fillText(info.priceInt,pt.x + 100, pt.y + 690);
+
+	    ctx.font="24px Verdana";
+		ctx.fillStyle="#E93B3D";
+		ctx.fillText(info.priceFloat, pt.x+ 180, pt.y + 690);
+
+		// 绘制拼团人数
+	    ctx.font="24px Verdana";
+		ctx.fillStyle="#999999";
+		ctx.fillText("test" + info.tuanNum + "test", pt.x+ 460, pt.y + 690);
+
+	    ctx.closePath();
+	} 
+
+}
+
+var drawServiceInfo = (pt, serviceInfo) => {
+	ctx.beginPath(); 
+
+	if(serviceInfo && serviceInfo.length > 4) {
+		serviceInfo = serviceInfo.slice(0, 4)
+	}
+
+	var offset = 0;
+
+	if(serviceInfo.length > 0) {
+		for (let i = 0; i < serviceInfo.length ; i++) {
+			ctx.beginPath();
+			ctx.arc(pt.x + offset, pt.y, 10,0,2*Math.PI);
+			ctx.strokeStyle = '#f97c54';
+			ctx.stroke();
+			ctx.closePath();
+
+			ctx.beginPath();
+			ctx.moveTo(pt.x + offset - 5, pt.y, 10,0,2*Math.PI);
+			ctx.lineTo(pt.x + offset , pt.y + 5, 10,0,2*Math.PI);
+			ctx.lineTo(pt.x + offset + 6 , pt.y - 4, 10,0,2*Math.PI);
+			ctx.stroke();
+			ctx.closePath();
+
+			ctx.beginPath();
+		    ctx.font="20px Verdana";
+			ctx.fillStyle="#999999";
+			ctx.fillText(serviceInfo[i], pt.x + offset + 20, pt.y + 8);
+			ctx.closePath();
+
+			var addValue = serviceInfo[i].length >= 5 ?  200 : (serviceInfo[i].length >= 4) ? 140 : 130;
+			offset += addValue
+		}
+	}
+
+}
+ 
+var drawRoundedRect = (rect, r, ctx, lineColor) => {  
+    var ptA = Point(rect.x + r, rect.y);  
+    var ptB = Point(rect.x + rect.width, rect.y);  
+    var ptC = Point(rect.x + rect.width, rect.y + rect.height);  
+    var ptD = Point(rect.x, rect.y + rect.height);  
+    var ptE = Point(rect.x, rect.y);  
+      
+    ctx.beginPath();  
+    ctx.moveTo(ptA.x, ptA.y);  
+    ctx.arcTo(ptB.x, ptB.y, ptC.x, ptC.y, r);  
+    ctx.arcTo(ptC.x, ptC.y, ptD.x, ptD.y, r);  
+    ctx.arcTo(ptD.x, ptD.y, ptE.x, ptE.y, r);  
+    ctx.arcTo(ptE.x, ptE.y, ptA.x, ptA.y, r);  
+    ctx.strokeStyle = lineColor;
+    ctx.stroke();  
+    ctx.closePath();
+} 
+
+var drawDialogAngle =  (pt, lineColor) => {
+	ctx.beginPath();  
+    ctx.moveTo(pt.x, pt.y);  
+    ctx.lineTo(pt.x + 10 , pt.y - 10); 
+    ctx.lineTo(pt.x + 20 , pt.y); 
+    ctx.strokeStyle = lineColor;
+    ctx.stroke();
+    ctx.closePath();
+
+    ctx.beginPath(); 
+	ctx.moveTo(pt.x + 2, pt.y);
+    ctx.lineTo(pt.x + 19 , pt.y); 
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "white";
+    ctx.stroke(); 
+    ctx.closePath();
+}
+
+var drawDialogBox = () => {
+	var rect = Rect(MARGIN , 180, 690, 810);  
+	drawRoundedRect(rect, 10, ctx, '#056436'); 
+	drawDialogAngle(Point(MARGIN + 30, 180));
+}
+
+var info = {
+	headImg: "http://img2.3lian.com/2014/f5/63/d/16.jpg",
+	productImg: "http://img2.3lian.com/2014/f5/63/d/16.jpg",
+	title: "Apple iPhoneXApple iPhoneXApple...",
+	priceInt: "6900",
+	priceFloat: ".00",
+	tuanNum: "1266"
+}
+
+drawDialogBox();
+drawHeadImg(Point(MARGIN + 30 , 30 + 30), 30, info.headImg);
+drawNick("April", 110, 70);
+drawComment("Hello", 30, 140);
+drawProductInfo(Point(MARGIN + 30 , 210), 630, 630, info);
+drawServiceInfo(Point(MARGIN + 40 , 945), ["Bill","Cenderilla", "Amy", "Catty"])
+
+
+
+</script>
+
+</body>
+</html>
+
