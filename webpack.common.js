@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -27,6 +28,11 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules/,
             use: ["babel-loader"]
+        }, {
+            test: /\.vue$/,
+            use: [
+            'vue-loader'
+        ]
         }, {
             test: /\.(png|svg|jpg|gif)$/,
             use: [
@@ -63,7 +69,9 @@ module.exports = {
 
         new webpack.NamedModulesPlugin(),
 
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+
+        new VueLoaderPlugin()
     ],
 
     output: {

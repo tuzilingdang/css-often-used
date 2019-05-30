@@ -29,6 +29,7 @@
     "eslint-loader": "^2.1.2",
     "lodash": "^4.17.11",
     "vue": "^2.6.10",
+    "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2"
