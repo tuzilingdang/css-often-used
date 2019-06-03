@@ -1,9 +1,6 @@
 <template>
     <div class="container">
-
-
         <router-view></router-view>
-
     </div>
 </template>
 
@@ -26,7 +23,6 @@
 
 <style lang="scss">
     $bg-color: #eeeeee;
-    $mid-pink: #e28293;
     $font-color-white: whitesmoke;
 
     .container {

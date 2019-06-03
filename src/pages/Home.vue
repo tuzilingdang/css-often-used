@@ -1,10 +1,14 @@
 <template>
     <ul class="sl">
         <li>
-            <router-link to="/paper">层叠书页效果</router-link>
+            <router-link to="/paper">层叠书页</router-link>
         </li>
-        <li></li>
-        <li></li>
+        <li>
+            <router-link to="/loading">Loading</router-link>
+        </li>
+        <li>
+            <router-link to="/radio">单选框和复选框</router-link>
+        </li>
         <li></li>
     </ul>
 </template>

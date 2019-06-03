@@ -7,6 +7,8 @@ import app from './App.vue'
 import Home from './pages/Home.vue'
 import Demo from './layouts/Demo.vue'
 import Paper from './components/Paper.vue'
+import Loading from './components/Loading.vue'
+import Radio from './components/Radio.vue'
 
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -15,12 +17,16 @@ const router = new VueRouter({
             component: Home
         },
         {
-            path: '/demo',
-            component: Demo
-        },
-        {
             path: '/paper',
             component: Paper
+        },
+        {
+            path: '/loading',
+            component: Loading
+        },
+        {
+            path: '/radio',
+            component: Radio
         }
     ]
 });
