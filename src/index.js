@@ -5,7 +5,8 @@ import VueRouter from 'vue-router';
 import app from './App.vue'
 
 import Home from './pages/Home.vue'
-import Demo from './pages/Demo.vue'
+import Demo from './layouts/Demo.vue'
+import Paper from './components/Paper.vue'
 
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -16,6 +17,10 @@ const router = new VueRouter({
         {
             path: '/demo',
             component: Demo
+        },
+        {
+            path: '/paper',
+            component: Paper
         }
     ]
 });
