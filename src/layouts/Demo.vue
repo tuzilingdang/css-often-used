@@ -16,6 +16,7 @@
   .effect {
     margin-bottom: 5vh;
   }
+  
   .demo {
     width: 100%;
     height: 100%;

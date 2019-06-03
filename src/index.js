@@ -9,6 +9,7 @@ import Demo from './layouts/Demo.vue'
 import Paper from './components/Paper.vue'
 import Loading from './components/Loading.vue'
 import Radio from './components/Radio.vue'
+import Typewriter from './components/Typewriter.vue'
 
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -27,6 +28,10 @@ const router = new VueRouter({
         {
             path: '/radio',
             component: Radio
+        },
+        {
+            path: '/typewriter',
+            component: Typewriter
         }
     ]
 });

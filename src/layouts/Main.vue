@@ -1,12 +1,5 @@
 <template>
   <div class="main">
-    <!-- <ul>
-      <li>
-        <div @click="jump('/')">Home</div>
-        <div @click="jump('/demo')">Demo</div>
-      </li>
-    </ul> -->
-
     <slot></slot>
   </div>
 </template>
